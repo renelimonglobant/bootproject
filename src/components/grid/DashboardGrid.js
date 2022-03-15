@@ -11,21 +11,18 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-
 import SettingsIcon from "@mui/icons-material/Settings";
-
 import { Paths } from "../../config/Paths";
-import { useNavigate } from "react-router-dom";
-// import Home from "../../pages/Home";
-// import Login from "../../pages/Login";
-// import Register from "../../pages/Register";
+import { useNavigate, Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import fireBaseApp from "../../config/Credentials";
+import AddIcon from "@mui/icons-material/Add";
+import Notes from "../Notes";
 
 const drawerWidth = 220;
 
 export default function ClippedDrawer() {
-  const [logout, setLogout] = React.useState(false)
+  const [logout, setLogout] = React.useState(false);
   let navigate = useNavigate();
   const auth = getAuth(fireBaseApp);
 
@@ -94,13 +91,9 @@ export default function ClippedDrawer() {
               onClick={() => {
                 signOut(auth)
                   .then(() => {
-                    // Sign-out successful.
-                    console.log("success");
-                    // setLogout(true)
-                    navigate('/login')
+                    navigate("/login");
                   })
                   .catch((error) => {
-                    // An error happened.
                     console.log("error");
                   });
               }}
@@ -120,14 +113,37 @@ export default function ClippedDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {/* <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Routes> */}
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur
-        </Typography> */}
+        <Box
+          component="div"
+          sx={{
+            textAlign: "right",
+            "& a": {
+              backgroundColor: (theme) => theme.global.mainBlue,
+              color: (theme) => theme.global.secondaryBlue,
+              textDecoration: "none",
+              display: "inline-flex",
+              borderRadius: 4,
+              py: 1,
+              px: 3,
+              "&:hover": {
+                backgroundColor: (theme) => theme.global.secondaryBlue,
+                color: (theme) => theme.global.mainBlue,
+              },
+            },
+          }}
+        >
+          <Link to="add">
+            <AddIcon /> note
+          </Link>
+        </Box>
+        <Box
+          component="div"
+          sx={{
+            textAlign: "right",
+          }}
+        >
+          <Notes />
+        </Box>
       </Box>
     </Box>
   );

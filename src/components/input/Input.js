@@ -17,7 +17,8 @@ const ValidationTextField = styled(TextField)({
   },
 });
 
-const Input = ({ name, id, type = "text" }) => {
+const Input = ({ name, id, type = "text", ...rest }) => {
+  // console.log(rest)
   return (
     <>
       <ValidationTextField
@@ -28,6 +29,7 @@ const Input = ({ name, id, type = "text" }) => {
         id={id}
         type={type}
         sx={{ mt: 2, width: "100%" }}
+        {...rest}
       />
     </>
   );

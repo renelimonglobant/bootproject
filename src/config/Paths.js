@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 export const Paths = [
   {
-    name: "Home",
+    name: "Dashboard",
     icon: <HomeIcon />,
     pathname: "/",
   },
